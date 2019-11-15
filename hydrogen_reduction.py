@@ -36,7 +36,7 @@ bias_list.close()
 # Subtract the bias frame from the science frame using element-by-element array subtraction
 
 subtracted_science = np.subtract(hdu_list[0].data,bias_list[0].data)
-print(subtracted_science)
+plt.imshow(subtracted_science)
 
 # Import Flat fram
 
@@ -48,4 +48,5 @@ flat_list.close()
 # Divide the subtracted frame by the flat
 
 divided_science = np.divide(subtracted_science,flatdata)
-print(divided_science)
+plt.imshow(divided_science)
+plt.imshow(np.log10(divided_science))
