@@ -37,8 +37,9 @@ bias_list.close()
 
 subtracted_science = np.subtract(hdu_list[0].data,bias_list[0].data)
 plt.imshow(subtracted_science)
+plt.show()
 
-# Import Flat fram
+# Import Flat frame
 
 flat_list = fits.open(r"C:\Users\14238\Downloads\CosmoCrew\flats.fits\CCD_Image_35.fit")
 flat_list.info()
@@ -50,3 +51,16 @@ flat_list.close()
 divided_science = np.divide(subtracted_science,flatdata)
 plt.imshow(divided_science)
 plt.imshow(np.log10(divided_science))
+plt.show()
+
+# Plot the emission values of the reduced frame 
+plt.plot(divided_science[:,450]) 
+plt.show()
+# Plot the sum of the values from columns 450-550
+plt.plot(np.sum(divided_science[:,450:550],axis=1))
+plt.show()
+
+# Plot the science frame without dividing by the flat to produce a graph without the
+# effects of the uneven flat frame
+plt.plot(np.sum(subtracted_science[:,450:550],axis=1))
+plt.show()
